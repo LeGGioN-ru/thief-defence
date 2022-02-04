@@ -4,15 +4,15 @@ public class AlarmVolumeChanger : MonoBehaviour
 {
     [SerializeField] private DoorAlarmTrigger _doorAlarmTrigger;
     [SerializeField] private AudioSource _alarmSound;
-    [SerializeField] private float volumePercentChanging;
+    [SerializeField] private float _volumePercentChanging;
 
     private void OnValidate()
     {
         const int MaxChangingPercent = 1;
 
-        if (volumePercentChanging > MaxChangingPercent)
+        if (_volumePercentChanging > MaxChangingPercent)
         {
-            volumePercentChanging = MaxChangingPercent;
+            _volumePercentChanging = MaxChangingPercent;
         }
     }
 
@@ -30,11 +30,11 @@ public class AlarmVolumeChanger : MonoBehaviour
 
         if (_doorAlarmTrigger.IsThiefInHouse == false)
         {
-            _alarmSound.volume = Mathf.MoveTowards(_alarmSound.volume, MinVolume, volumePercentChanging * Time.deltaTime);
+            _alarmSound.volume = Mathf.MoveTowards(_alarmSound.volume, MinVolume, _volumePercentChanging * Time.deltaTime);
         }
         else
         {
-            _alarmSound.volume = Mathf.MoveTowards(_alarmSound.volume, MaxVolume, volumePercentChanging * Time.deltaTime);
+            _alarmSound.volume = Mathf.MoveTowards(_alarmSound.volume, MaxVolume, _volumePercentChanging * Time.deltaTime);
         }
     }
 }

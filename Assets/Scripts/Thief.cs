@@ -12,18 +12,24 @@ public class Thief : MonoBehaviour
     private SpriteRenderer _thiefSprite;
     private int _currentPoint = 0;
     private bool _isThiefMove = true;
+    private WaitForSecondsRealtime _realSecondTimeDelay;
+    private WaitForFixedUpdate _fixedUpdateDelay;
+
 
     private void Start()
     {
         _thiefSprite = GetComponent<SpriteRenderer>();
         GetPathPoints();
 
+        _realSecondTimeDelay = new WaitForSecondsRealtime(_delayBeforeNextPoint);
+        _fixedUpdateDelay = new WaitForFixedUpdate();
+
         StartCoroutine(Move());
     }
 
     private IEnumerator Move()
     {
-        while (_isThiefMove == true)
+        while (_isThiefMove)
         {
             transform.position = Vector2.MoveTowards(transform.position, _points[_currentPoint].position, _speed * Time.deltaTime);
 
@@ -31,17 +37,17 @@ public class Thief : MonoBehaviour
             {
                 _currentPoint++;
 
-                _thiefSprite.flipX = _thiefSprite.flipX == true ? false : true;
+                _thiefSprite.flipX = !_thiefSprite.flipX;
 
                 if (_currentPoint >= _points.Length)
                 {
                     _currentPoint = 0;
                 }
 
-                yield return new WaitForSecondsRealtime(_delayBeforeNextPoint);
+                yield return _realSecondTimeDelay;
             }
 
-            yield return new WaitForFixedUpdate();
+            yield return _fixedUpdateDelay;
         }
     }
 

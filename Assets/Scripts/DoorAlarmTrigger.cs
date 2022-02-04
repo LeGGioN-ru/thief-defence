@@ -11,9 +11,9 @@ public class DoorAlarmTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out Thief thief) == true)
+        if (collision.TryGetComponent(out Thief thief))
         {
-            _isThiefInHouse = IsThiefInHouse == true ? false : true;
+            _isThiefInHouse = !IsThiefInHouse;
             _alarm?.Invoke();
         }
     }
