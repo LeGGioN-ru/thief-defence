@@ -9,27 +9,35 @@ public class Thief : MonoBehaviour
     [SerializeField] private int _delayBeforeNextPoint;
 
     private Transform[] _points;
-    private SpriteRenderer _thiefSprite;
+    private SpriteRenderer _sprite;
     private int _currentPoint = 0;
-    private bool _isThiefMove = true;
+    private bool _isMove = true;
     private WaitForSecondsRealtime _realSecondTimeDelay;
-    private WaitForFixedUpdate _fixedUpdateDelay;
+    private WaitForFixedUpdate _fixedUpdateDelay = new WaitForFixedUpdate();
 
+    public void StopMoving()
+    {
+        _isMove = false;
+    }
+
+    public void StartMoving()
+    {
+        _isMove = true;
+    }
 
     private void Start()
     {
-        _thiefSprite = GetComponent<SpriteRenderer>();
+        _sprite = GetComponent<SpriteRenderer>();
         GetPathPoints();
 
         _realSecondTimeDelay = new WaitForSecondsRealtime(_delayBeforeNextPoint);
-        _fixedUpdateDelay = new WaitForFixedUpdate();
 
         StartCoroutine(Move());
     }
 
     private IEnumerator Move()
     {
-        while (_isThiefMove)
+        while (_isMove)
         {
             transform.position = Vector2.MoveTowards(transform.position, _points[_currentPoint].position, _speed * Time.deltaTime);
 
@@ -37,7 +45,7 @@ public class Thief : MonoBehaviour
             {
                 _currentPoint++;
 
-                _thiefSprite.flipX = !_thiefSprite.flipX;
+                _sprite.flipX = !_sprite.flipX;
 
                 if (_currentPoint >= _points.Length)
                 {
@@ -59,15 +67,5 @@ public class Thief : MonoBehaviour
         {
             _points[i] = _path.GetChild(i);
         }
-    }
-
-    public void StopMoving()
-    {
-        _isThiefMove = false;
-    }
-
-    public void StartMoving()
-    {
-        _isThiefMove = true;
     }
 }

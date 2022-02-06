@@ -511,8 +511,8 @@ GameObject:
   - component: {fileID: 538655915}
   - component: {fileID: 538655914}
   - component: {fileID: 538655917}
+  - component: {fileID: 538655921}
   - component: {fileID: 538655918}
-  - component: {fileID: 538655919}
   - component: {fileID: 538655916}
   m_Layer: 0
   m_Name: Door
@@ -597,7 +597,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f8ff45dde9100a84eaae25a2a1da248b, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0
   m_Pitch: 1
   Loop: 1
@@ -694,20 +694,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 725d20df4b6cd044f99ef77f1c7f11b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _alarm:
+  _event:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 538655919}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
+      - m_Target: {fileID: 538655921}
+        m_TargetAssemblyTypeName: Alarm, Assembly-CSharp
+        m_MethodName: DetectThief
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 538655921}
+        m_TargetAssemblyTypeName: Alarm, Assembly-CSharp
+        m_MethodName: StartSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!61 &538655918
 BoxCollider2D:
@@ -735,21 +747,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &538655919
+--- !u!114 &538655921
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 538655913}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 879ce4c1d0282ae4e9d42d9da91630df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _doorAlarmTrigger: {fileID: 538655917}
-  _alarmSound: {fileID: 538655916}
-  volumePercentChanging: 0.1
+  _sound: {fileID: 538655916}
+  _volumePercentChanging: 0.1
 --- !u!1 &758103405
 GameObject:
   m_ObjectHideFlags: 0
