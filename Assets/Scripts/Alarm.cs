@@ -12,9 +12,10 @@ public class Alarm : MonoBehaviour
     public void DetectThief()
     {
         _isThiefInHouse = !_isThiefInHouse;
+        StartSound();
     }
 
-    public void StartSound()
+    private void StartSound()
     {
         if (_sound.isPlaying == false)
         {
@@ -49,15 +50,13 @@ public class Alarm : MonoBehaviour
                 {
                     _sound.Stop();
                 }
-
-                yield return _fixedUpdateDelay;
             }
             else
             {
                 _sound.volume = Mathf.MoveTowards(_sound.volume, MaxVolume, _volumePercentChanging * Time.deltaTime);
-
-                yield return _fixedUpdateDelay;
             }
+
+            yield return _fixedUpdateDelay;
 
             Debug.Log("Статус музыки (вкл/выкл) - " + _sound.isPlaying + " громкость музыки - " + _sound.volume);
         }

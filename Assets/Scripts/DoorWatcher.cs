@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class DoorTouchEvent : MonoBehaviour
+public class DoorWatcher : MonoBehaviour
 {
     [SerializeField] private UnityEvent _event;
 

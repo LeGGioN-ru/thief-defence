@@ -55,7 +55,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Thief.cs" />
     <Compile Include="Assets\Scripts\Alarm.cs" />
-    <Compile Include="Assets\Scripts\DoorTouchEvent.cs" />
+    <Compile Include="Assets\Scripts\DoorWatcher.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
